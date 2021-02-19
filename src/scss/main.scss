@@ -67,11 +67,12 @@ body {
   font-size: $fs-sm;
   margin: 0;
   padding: $base*3 $base*4;
-  border: 0;
-  background-color: none;
+  border: 1px solid transparent;
+  background: none;
   border-radius: 2px;
   text-decoration: none;
   transition: $transition;
+
   &--primary {
     background-color: #D2E1FF;
     color: #3A79FF;
@@ -79,6 +80,25 @@ body {
       background-color: darken(#D2E1FF, 5%);
     }
   }
+
+  &--secondary {
+    background-color: #4c85ff;
+    color: #fff;
+    &:hover {
+      background-color: darken(#4c85ff, 5%);
+    }
+  }
+
+  &--no-bg {
+    // background-color: #D2E1FF;
+    color: #adb4d2;
+    border: 1px solid #d1d1e4;
+    &:hover {
+      color: darken(#adb4d2, 10%);
+      border: 1px solid darken(#d1d1e4, 10%);
+    }
+  }
+
 }
 
 h1, 
@@ -99,7 +119,12 @@ h2 {
   margin-bottom: $base * 7;
   font-size: 48px;
 }
-h3 {font-size: 36px;}
+
+h3 {
+  margin-bottom: $base * 7;
+  font-size: 36px;
+}
+
 h4 {font-size: 24px;}
 
 h5 {
@@ -110,6 +135,40 @@ h5 {
 
 .ta-c {
   text-align: center;
+}
+
+.dots {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    width: $base*2;
+    height: $base*2;
+    border-radius: 100%;
+    background-color: #d1d6e3;
+    transition: $transition;
+    cursor: pointer;
+    &--active {
+      background-color: #5283ff;
+    }
+    & + & {
+      margin-left: $base*3;
+    }
+  }
+}
+
+.btn-group {
+  display: inline-flex;
+  .btn:nth-child(1) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .btn:nth-child(1) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
 
 // === / COMMON ===
@@ -201,7 +260,14 @@ h5 {
 
 // === HERO-IMAGE ===
 .section-hero-image {
+  position: relative;
   background-color: #f4f7ff;
+  .dots {
+    position: absolute;
+    bottom: $base * 7;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .slider-hero-image {
@@ -212,7 +278,11 @@ h5 {
     height: $base * 140;
     text-align: center;
     background-size: cover;
-    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    &:nth-child(1) {
+      background-image: url(../img/upload/hero_image.png);
+    }
     &-content {
       h2 {
         font-weight: $fw-light;
@@ -238,16 +308,9 @@ h5 {
   border-radius: 100%;
   background-color: #fff;
   box-shadow: 0 10px 50px rgba(#c9d1e7, .6);
-  &::before {
-    display: block;
-    content: '';
-    width: 0;
-    height: 0;
-    margin-left: $base*4;
-    border-width: $base*2 $base*3;
-    border-style: solid;
-    border-color: transparent;
-    border-left-color: #5e81ff;
+  svg {
+    width: $base * 3;
+    height: $base * 3;
   }
 }
 
@@ -258,13 +321,54 @@ h5 {
   .section-inner {
     padding-top: $padding-vertical-sm;
     padding-bottom: $padding-vertical-sm;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      transition: $transition;
+      opacity: .4;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
 // === / CUSTOMERS ===
 
 // === PLAN-AND-MANAGE ===
 .section-plan-and-manage {
+  position: relative;
   background-color: #F5F8FF;
+  overflow: hidden;
+
+  &__content {
+    width: 50%;
+
+    .aside-image {
+      position: absolute;
+      top: $base * 12;
+      left: 50%;
+    }
+
+    h2 {
+      font-weight: $fw-light;
+      span {
+        font-weight: $fw-medium;
+      }
+    }
+    .text {
+      margin-bottom: $base*12;
+      line-height: 2;
+    }
+    .btn-group {
+      svg {
+        margin-left: $base;
+      }
+    }
+  }
+
+
 }
 // === / PLAN-AND-MANAGE ===
 
